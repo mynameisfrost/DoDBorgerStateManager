@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borger State Manager</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px; 
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        .entry { 
+            border: 1px solid #333; 
+            padding: 10px; 
+            margin-top: 10px; 
+            background: #2a2a2a;
+            border-radius: 5px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 5px;
+        }
+        input {
+            background: #333;
+            color: #fff;
+        }
+        input::placeholder {
+            color: #888;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            background: #2a2a2a;
+            color: #ffffff;
+            border: 1px solid #333;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Borger State Manager</h2>
+        <label>Username: <input type="text" id="username"></label><br><br>
+        <label>Duty State Acceptance Link: <input type="text" id="acceptLink"></label><br><br>
+        <label>Duty State Post Link: <input type="text" id="postLink"></label><br><br>
+        <label>Duty State Duration: <input type="number" id="duration" placeholder="Hours" min="0"></label><br><br>
+        <button onclick="addEntry()">Add Entry</button>
+        <button onclick="copyToClipboard()">Copy to Clipboard</button>
+        
+        <h3>Duty Records</h3>
+        <textarea id="outputField" readonly></textarea>
+    </div>
+    
+    <script>
+        function addEntry() {
+            let username = document.getElementById('username').value;
+            let duration = document.getElementById('duration').value;
+            let acceptLink = document.getElementById('acceptLink').value;
+            let postLink = document.getElementById('postLink').value;
+            
+            if (!username || !acceptLink || !postLink || !duration) {
+                alert('Please fill in all fields.');
+                return;
+            }
+            
+            let entryText = `Username: ${username}\nDuty state acceptance photo: ${acceptLink}\nDuty state post photo: ${postLink}\nDuty state duration: ${duration} Hour(s)\n\n`;
+            
+            document.getElementById('outputField').value += entryText;
+        }
+
+        function copyToClipboard() {
+            let outputField = document.getElementById('outputField');
+            outputField.select();
+            document.execCommand('copy');
+            alert('Copied to clipboard!');
+        }
+    </script>
+</body>
+</html>
